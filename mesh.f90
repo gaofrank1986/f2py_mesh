@@ -3,14 +3,37 @@ module mesh
     implicit none
     
     real(8),allocatable :: XYZB(:,:),DXYZB(:,:)
+    !xyzb => (3,node_id)  node data 
+    !dxyzb => (3,nrml_id) derivative data
     integer,allocatable :: NCONB(:,:),NCONDB(:,:)   
+    ! nconb => node list body mesh
+    ! ncondb => normal list body
     real(8),allocatable :: XYZE(:,:,:),DXYZE(:,:,:),TXYZE(:,:,:)
+    ! xyze =>  used in convsb, new full mesh for node (3,8,elem_id)
+    ! dxyze => used in convsb, new full mesh for normal (3,8,elem,id)
     real(8),allocatable :: XYZTP(:,:),DXYZTP(:,:)
+    ! xyztp => convsb, combined node mesh, xyztp(3,node_id)
+    ! dxyztp = > combined normal mesh, dxyztp(3,nrml_id)
     integer,allocatable :: NCN(:),NCON(:,:),NCOND(:,:),IETYPE(:)
+    ! ncn => elem_type ,namely, the node number in a elem
+    ! ncon => combined node list,ncon(8,elem_id)
+    ! ncond => combined nrml list,ncond(8,elem_id)
+    ! ietype => flag show if a elem is free surface mesh or a body mesh
     integer,allocatable :: NNORMN(:)
-    integer :: nsys,nelem,nnode,nelemb,nnb,nnbd,nelemf,nnf,nnoded,isys
-    real(8),protected :: wk,h,beta,amp
+    integer :: nsys,nelem,nnode,nnoded,isys
+    ! nsys => about symmetr
+    ! nelem => elem number in combined mesh
+    ! nnode => node number in combined mesh
+    ! nnoded => nrml nmber in combined mesh
+    integer :: nelemb,nnb,nnbd,nelemf,nnf
+    ! nelemb => elem num in body
+    ! nnb => node num  in body 
+    ! nnbd => nrml num in body
+    ! nelemf => elem num in fs
+    ! nnf => node num in fs
     
+    real(8),protected :: wk,h,beta,amp
+    ! wave information
 contains
 
     subroutine read_mesh()
@@ -24,15 +47,13 @@ contains
       !REAL*8  PL_AMP(6),FORAMP
       !REAL*8  FCD_AMR,  FCD_AMI
     
-    
-    
         OPEN(1, FILE='INPUT/DATIN.txt',      STATUS='OLD') 
         OPEN(2, FILE='INPUT/DATBDMS.txt',    STATUS='OLD') 
         OPEN(3, FILE='INPUT/DATWPMS.txt',    STATUS='OLD')
 
         READ(1,*)      IFWKO
         READ(1,*)      H, AMP, WK, BETA
-
+        !==================body mesh================================
         READ(2,*)   ISYS 
         READ(2,*)   NELEMB, NNB, NNBD, IPOL
 
@@ -40,6 +61,13 @@ contains
         IF(ISYS.EQ.0) NSYS=1
         IF(ISYS.EQ.1) NSYS=2
         IF(ISYS.EQ.2) NSYS=4
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   .mesh.f90.swp
+	modified:   mesh.f90
 
         READ(3,*)   NELEMF
     
