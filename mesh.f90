@@ -20,6 +20,7 @@ module mesh
     ! ncond => combined nrml list,ncond(8,elem_id)
     ! ietype => flag show if a elem is free surface mesh or a body mesh
     integer,allocatable :: NNORMN(:)
+    real(8),allocatable :: xyz(:,:),dxyz(:,:)
     integer :: nsys,nelem,nnode,nnoded,isys
     ! nsys => about symmetr
     ! nelem => elem number in combined mesh
@@ -39,10 +40,10 @@ contains
     subroutine read_mesh()
         implicit none
 
-        INTEGER I,IFWKO,IS,M,IP,IPOL,K
+        INTEGER IFWKO,IPOL
       !INTEGER NTnum,IFLAG_T,IND,
       
-        REAL*8  WL,Alpha
+        REAL*8  WL
       !REAL*8  FAMPR(6),FAMPI(6),FORCER(6),FORCEI(6)
       !REAL*8  PL_AMP(6),FORAMP
       !REAL*8  FCD_AMR,  FCD_AMI
@@ -95,7 +96,7 @@ contains
     end subroutine
 
 
-    subroutine _prepare_mesh()
+    subroutine prepare_mesh()
         implicit none
         
         integer :: ind,node_max
@@ -243,7 +244,7 @@ contains
        !USE MVAR_mod
      IMPLICIT NONE
 
-       INTEGER IEB,IEL,IND,I,K,L,M,N,KK,NN,NND0
+       INTEGER IEB,IEL,IND,I,L,M,NND0,kk
      REAL(8) X,Y,Z,DX,DY,DZ,DR2,tmp1,tmp2,tmp3,tol
 
         !C ------------------------------------------------------------

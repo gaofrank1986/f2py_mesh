@@ -1,0 +1,362 @@
+running build
+running config_cc
+unifing config_cc, config, build_clib, build_ext, build commands --compiler options
+running config_fc
+unifing config_fc, config, build_clib, build_ext, build commands --fcompiler options
+running build_src
+build_src
+building extension "te" sources
+f2py options: []
+f2py:> /tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c
+creating /tmp/tmpKNxmwf/src.linux-x86_64-2.7
+Reading fortran codes...
+	Reading file 'mesh.f90' (format:free)
+Post-processing...
+	Block: te
+			Block: mesh
+				Block: read_mesh
+				Block: prepare_mesh
+				Block: meshfs4
+				Block: meshbd
+				Block: convsb
+Post-processing (stage 2)...
+	Block: te
+		Block: unknown_interface
+			Block: mesh
+				Block: read_mesh
+				Block: prepare_mesh
+				Block: meshfs4
+				Block: meshbd
+				Block: convsb
+Building modules...
+	Building module "te"...
+		Constructing F90 module support for "mesh"...
+		  Variables: nsys nnoded ncn nnf xyz wk nnb amp xyztp ncondb isys ncon ncond ietype nelemb xyze nelemf nnbd nconb nnode h beta txyze dxyz dxyztp dxyzb nelem nnormn xyzb dxyze
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+getarrdims:warning: assumed shape array, using 0 instead of ':'
+			Constructing wrapper function "mesh.read_mesh"...
+			  read_mesh()
+			Constructing wrapper function "mesh.prepare_mesh"...
+			  prepare_mesh()
+			Constructing wrapper function "mesh.meshfs4"...
+			  meshfs4()
+			Constructing wrapper function "mesh.meshbd"...
+			  meshbd(ncor)
+			Constructing wrapper function "mesh.convsb"...
+			  convsb()
+	Wrote C/API module "te" to file "/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c"
+	Fortran 90 wrappers are saved to "/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90"
+  adding '/tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.c' to sources.
+  adding '/tmp/tmpKNxmwf/src.linux-x86_64-2.7' to include_dirs.
+copying /usr/lib/python2.7/dist-packages/numpy/f2py/src/fortranobject.c -> /tmp/tmpKNxmwf/src.linux-x86_64-2.7
+copying /usr/lib/python2.7/dist-packages/numpy/f2py/src/fortranobject.h -> /tmp/tmpKNxmwf/src.linux-x86_64-2.7
+  adding '/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90' to sources.
+build_src: building npy-pkg config files
+running build_ext
+customize UnixCCompiler
+customize UnixCCompiler using build_ext
+customize Gnu95FCompiler
+Found executable /usr/bin/gfortran
+customize Gnu95FCompiler
+customize Gnu95FCompiler using build_ext
+building 'te' extension
+compiling C sources
+C compiler: x86_64-linux-gnu-gcc -pthread -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fno-strict-aliasing -D_FORTIFY_SOURCE=2 -g -fstack-protector-strong -Wformat -Werror=format-security -fPIC
+
+creating /tmp/tmpKNxmwf/tmp
+creating /tmp/tmpKNxmwf/tmp/tmpKNxmwf
+creating /tmp/tmpKNxmwf/tmp/tmpKNxmwf/src.linux-x86_64-2.7
+compile options: '-I/tmp/tmpKNxmwf/src.linux-x86_64-2.7 -I/usr/lib/python2.7/dist-packages/numpy/core/include -I/usr/include/python2.7 -c'
+x86_64-linux-gnu-gcc: /tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.c
+In file included from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarraytypes.h:1761:0,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarrayobject.h:17,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.h:13,
+                 from /tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.c:2:
+/usr/lib/python2.7/dist-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:15:2: warning: #warning "Using deprecated NumPy API, disable it by " "#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+ #warning "Using deprecated NumPy API, disable it by " \
+  ^
+x86_64-linux-gnu-gcc: /tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c
+In file included from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarraytypes.h:1761:0,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/ndarrayobject.h:17,
+                 from /usr/lib/python2.7/dist-packages/numpy/core/include/numpy/arrayobject.h:4,
+                 from /tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.h:13,
+                 from /tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:17:
+/usr/lib/python2.7/dist-packages/numpy/core/include/numpy/npy_1_7_deprecated_api.h:15:2: warning: #warning "Using deprecated NumPy API, disable it by " "#defining NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION" [-Wcpp]
+ #warning "Using deprecated NumPy API, disable it by " \
+  ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c: In function ‘f2py_setup_mesh’:
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:494:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = ncn;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:496:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = xyz;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:500:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = xyztp;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:501:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = ncondb;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:503:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = ncon;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:504:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = ncond;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:505:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = ietype;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:507:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = xyze;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:510:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = nconb;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:514:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = txyze;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:515:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = dxyz;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:516:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = dxyztp;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:517:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = dxyzb;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:519:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = nnormn;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:520:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = xyzb;
+                                ^
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.c:521:32: warning: assignment from incompatible pointer type
+   f2py_mesh_def[i_f2py++].func = dxyze;
+                                ^
+compiling Fortran 90 module sources
+Fortran f77 compiler: /usr/bin/gfortran -Wall -ffixed-form -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran f90 compiler: /usr/bin/gfortran -Wall -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran fix compiler: /usr/bin/gfortran -Wall -ffixed-form -fno-second-underscore -Wall -fno-second-underscore -fPIC -O3 -funroll-loops
+compile options: '-I/tmp/tmpKNxmwf/src.linux-x86_64-2.7 -I/usr/lib/python2.7/dist-packages/numpy/core/include -I/usr/include/python2.7 -c'
+extra options: '-J/tmp/tmpKNxmwf/ -I/tmp/tmpKNxmwf/'
+gfortran:f90: mesh.f90
+mesh.f90:275.4:
+
+1100    FORMAT(8E15.6)
+    1
+Warning: Label 1100 at (1) defined but not used
+mesh.f90:438.4:
+
+1000   FORMAT(1X,8I6)
+    1
+Warning: Label 1000 at (1) defined but not used
+mesh.f90:168.38:
+
+        INTEGER I,IE,M,INODE,NCNN,K,KK
+                                      1
+Warning: Unused variable 'kk' declared at (1)
+mesh.f90:46.18:
+
+        REAL*8  WL
+                  1
+Warning: Unused variable 'wl' declared at (1)
+compiling Fortran sources
+Fortran f77 compiler: /usr/bin/gfortran -Wall -ffixed-form -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran f90 compiler: /usr/bin/gfortran -Wall -fno-second-underscore -fPIC -O3 -funroll-loops
+Fortran fix compiler: /usr/bin/gfortran -Wall -ffixed-form -fno-second-underscore -Wall -fno-second-underscore -fPIC -O3 -funroll-loops
+compile options: '-I/tmp/tmpKNxmwf/src.linux-x86_64-2.7 -I/usr/lib/python2.7/dist-packages/numpy/core/include -I/usr/include/python2.7 -c'
+extra options: '-J/tmp/tmpKNxmwf/ -I/tmp/tmpKNxmwf/'
+gfortran:f90: /tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:11.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:41.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:71.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:101.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:131.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:161.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:191.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:221.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:251.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:281.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:311.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:341.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:371.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:401.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:431.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:461.19:
+
+      integer r,i,j
+                   1
+Warning: Unused variable 'j' declared at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'dxyz' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'dxyzb' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'dxyze' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'dxyztp' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'ietype' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'ncn' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'ncon' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'nconb' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'ncond' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'ncondb' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'nnormn' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'txyze' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'xyz' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'xyzb' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'xyze' which has been explicitly imported at (1)
+/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.f90:487.10:
+
+      use mesh, only : nsys
+          1
+Warning: Unused module variable 'xyztp' which has been explicitly imported at (1)
+/usr/bin/gfortran -Wall -Wall -shared /tmp/tmpKNxmwf/tmp/tmpKNxmwf/src.linux-x86_64-2.7/temodule.o /tmp/tmpKNxmwf/tmp/tmpKNxmwf/src.linux-x86_64-2.7/fortranobject.o /tmp/tmpKNxmwf/mesh.o /tmp/tmpKNxmwf/tmp/tmpKNxmwf/src.linux-x86_64-2.7/te-f2pywrappers2.o -lgfortran -o ./te.so
+Removing build directory /tmp/tmpKNxmwf
