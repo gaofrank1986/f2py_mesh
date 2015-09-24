@@ -61,21 +61,13 @@ contains
         IF(ISYS.EQ.0) NSYS=1
         IF(ISYS.EQ.1) NSYS=2
         IF(ISYS.EQ.2) NSYS=4
-On branch master
-Your branch is up-to-date with 'origin/master'.
-Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
-
-	new file:   .mesh.f90.swp
-	modified:   mesh.f90
 
         READ(3,*)   NELEMF
     
-        !    mvarÖÐNELEM: number of total elements
+        ! =========================================
 
         NELEM=NELEMB+NELEMF
 
-        !WRITE(11,*) ' NELEM=',NELEM,'  IOPL=',IPOL
         ALLOCATE (NCONB(NELEMB,8),NCONDB(NELEMB,8))!body node/normal list
         ALLOCATE (XYZB(3,NNB),DXYZB(3,NNBD))    !body node/normal
         
@@ -85,20 +77,21 @@ Changes to be committed:
         allocate(NNORMN(8*NELEM) )
 
         ALLOCATE( XYZE(3,8,NELEM),DXYZE(3,8,NELEM))
-    !allocate(DAMPE(8,NELEM))
+        !allocate(DAMPE(8,NELEM))
         ALLOCATE( TXYZE(3,8,NELEM))
-    ALLOCATE( XYZTP(3,8*NELEM),DXYZTP(3,8*NELEM))!,DAMPTP(8*NELEM))
+        ALLOCATE( XYZTP(3,8*NELEM),DXYZTP(3,8*NELEM))!,DAMPTP(8*NELEM))
 
-    !ALLOCATE(SAMB(NELEM,16,0:8),SAMBXY(NELEM,16,3),
-!1         DSAMB(NELEM,16,6))
+        !ALLOCATE(SAMB(NELEM,16,0:8),SAMBXY(NELEM,16,3),
+        !&         DSAMB(NELEM,16,6))
 
-        call MESHFS4()
-    ! Read in data on free surface mesh
-        
-        !WRITE(11,*),'  After MESHFS4' 
 
-        call MESHBD(IPOL)           ! Read in data on body mesh
-        !WRITE(11,*),'  After MESHBD' ,
+        call MESHFS4()! Read in data on free surface mesh
+        call MESHBD(IPOL) ! Read in data on body mesh
+
+
+
+
+
     end subroutine
 
 !       MESHFS4 + MESHBD 
@@ -110,16 +103,14 @@ Changes to be committed:
 !C *                                                                 *
 !C *******************************************************************
 !C 
-       SUBROUTINE MESHFS4()
+    subroutine meshfs4()
 
-!     USE MVAR_MOD
-        IMPLICIT   NONE  
-        
+        implicit none
 
-        INTEGER IE,J,M
+        integer :: IE,J,M
         
         XYZE(3,1:8, 1:NELEMF)=0.0d0
-!
+        
         DO 100 IE=1, NELEMF
             IETYPE(IE)=2
             READ(3, *)    M, NCN(IE)
@@ -129,15 +120,11 @@ Changes to be committed:
       !dampe(:,:)=0.0d0
 
 100    CONTINUE
-!
-!
-!  ÊýŸÝÎÄŒþÖÐÎïÃæ·š·œÏòÖžÈëÁ÷ÌåÎªÕý
-!
+        ! in dat file ,positive nrml is set as pointing into fulid field
       DXYZE(1, 1:8, 1:NELEMF)= 0.0d0
       DXYZE(2, 1:8, 1:NELEMF)= 0.0d0
       DXYZE(3, 1:8, 1:NELEMF)= 1.0d0 
 !     DXYZE(3, 1:8, 1:NELEMF)=-1.0d0 
-
 
       RETURN
       END
@@ -157,17 +144,15 @@ Changes to be committed:
 !     INTEGER NELEM,NELEMB,NELEMF,NNODE,NNODED,NNB,NNBD,NNF,NNTCH
 
 
-      INTEGER NCOR,IPL,IPOLAR(50)
-      INTEGER I,IE,M,INODE,NCNN,K,KK
-      REAL*8  A1,A2,R1,R2,Z1
+        INTEGER NCOR,IPL,IPOLAR(50)
+        INTEGER I,IE,M,INODE,NCNN,K,KK
+        REAL*8  A1,A2,R1,R2,Z1
         REAL*8  XOFSET(50),YOFSET(50),ZOFSET(50)
-    real(8),parameter :: pi = 3.141592653589793
-!
-! --------------------------------------------
-!
+        real(8),parameter :: pi = 3.141592653589793
+        !
+        ! --------------------------------------------
         DO 5 I=1, NCOR
         READ(2,*)  M, IPOLAR(I), XOFSET(I),YOFSET(I),ZOFSET(I)
-!    print *, M, IPOLAR(I), XOFSET(I),YOFSET(I),ZOFSET(I)
 5       CONTINUE
 !
         DO 10 INODE=1, NNB
