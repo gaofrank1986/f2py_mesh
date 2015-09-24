@@ -19,6 +19,7 @@ module mesh
     ! ncon => combined node list,ncon(8,elem_id)
     ! ncond => combined nrml list,ncond(8,elem_id)
     ! ietype => flag show if a elem is free surface mesh or a body mesh
+
     integer,allocatable :: NNORMN(:)
     real(8),allocatable :: xyz(:,:),dxyz(:,:)
     integer :: nsys,nelem,nnode,nnoded,isys
@@ -35,6 +36,8 @@ module mesh
     
     real(8),protected :: wk,h,beta,amp
     ! wave information
+
+    integer,allocatable :: nodele(:,:),nodnoe(:),nodelj(:,:),nodqua(:) 
 contains
 
     subroutine read_mesh()
@@ -89,8 +92,9 @@ contains
         call MESHFS4()! Read in data on free surface mesh
         call MESHBD(IPOL) ! Read in data on body mesh
 
-
-
+        close(2)
+        close(1)
+        close(3)
 
 
     end subroutine
@@ -100,6 +104,7 @@ contains
         implicit none
         
         integer :: ind,node_max
+        integer :: j,inode,l,ielem
         
         node_max = max(nnode,nnoded)
         
@@ -112,7 +117,44 @@ contains
         do ind = 1,nnoded
             dxyz(1:3,ind) = dxyztp(1:3,ind)
         end do
+        
+        deallocate(xyztp,dxyztp)
 
+        !==============================================
+        allocate(nodele(nnode,64),nodnoe(nnode),nodelj(nnode,64)&
+                &,nodqua(nnode))
+        
+        
+        DO 50 INODE=1, NNODE 
+        L=0
+        DO 40 IELEM=1,  NELEM
+        DO 30 J=1,      NCN(IELEM)
+        IF(INODE.EQ.NCON(IELEM,J)) THEN
+        L=L+1
+        NODELE(INODE,L)=IELEM
+        NODELJ(INODE,L)=J
+        ENDIF
+30      CONTINUE
+40      CONTINUE
+        NODNOE(INODE)=L
+!                          
+        NODQUA(INODE)=0
+        IF( NSYS .GE. 2) THEN
+          IF( DABS(XYZ(2,INODE)).LT.1.0E-06 ) THEN
+          NODQUA(INODE)=2
+          END IF
+        END IF
+!
+        IF( NSYS .EQ. 4) THEN
+          IF( DABS(XYZ(1,INODE)).LT.1.0E-06.AND.&
+             & DABS(XYZ(2,INODE)).LT.1.0E-06) THEN
+           NODQUA(INODE)=5
+          ELSE IF( DABS(XYZ(1,INODE)).LT.1.0E-06 ) THEN
+           NODQUA(INODE)=4
+          ENDIF
+        END IF
+!
+50      CONTINUE
     end subroutine 
 !       MESHFS4 + MESHBD 
 !
