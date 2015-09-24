@@ -9,8 +9,8 @@ module mesh
     ! nconb => node list body mesh
     ! ncondb => normal list body
     real(8),allocatable :: XYZE(:,:,:),DXYZE(:,:,:),TXYZE(:,:,:)
-    ! xyze =>  used in convsb, new full mesh for node (3,8,elem_id)
-    ! dxyze => used in convsb, new full mesh for normal (3,8,elem,id)
+    ! xyze =>  before combine, new full mesh for node (3,8,elem_id)
+    ! dxyze => before combine, new full mesh for normal (3,8,elem,id)
     real(8),allocatable :: XYZTP(:,:),DXYZTP(:,:)
     ! xyztp => convsb, combined node mesh, xyztp(3,node_id)
     ! dxyztp = > combined normal mesh, dxyztp(3,nrml_id)
@@ -94,6 +94,25 @@ contains
 
     end subroutine
 
+
+    subroutine _prepare_mesh()
+        implicit none
+        
+        integer :: ind,node_max
+        
+        node_max = max(nnode,nnoded)
+        
+        allocate(xyz(3,node_max),dxyz(6,node_max))
+        
+        do ind = 1,nnode
+            xyz(1:3,ind) = xyztp(1:3,ind)
+        end do
+       ! didn't assing damptp 
+        do ind = 1,nnoded
+            dxyz(1:3,ind) = dxyztp(1:3,ind)
+        end do
+
+    end subroutine 
 !       MESHFS4 + MESHBD 
 !
 !C *******************************************************************
@@ -227,63 +246,64 @@ contains
        INTEGER IEB,IEL,IND,I,K,L,M,N,KK,NN,NND0
      REAL(8) X,Y,Z,DX,DY,DZ,DR2,tmp1,tmp2,tmp3,tol
 
-!C ------------------------------------------------------------
-!C  NELEM : total number of elements 
-!C  NELEMF: total number of elements 
-!C  NELEMB: total number of elements 
-!C
-!C  NNODE : total number of nodes 
-!C  NNF   : total number of nodes on the free surface 
-!C  NNB   : total number of nodes on the body surface
-!C ------------------------------------------------------------
-!C    
-!C ** check nodes' situation 
+        !C ------------------------------------------------------------
+        !C  NELEM : total number of elements 
+        !C  NELEMF: total number of elements 
+        !C  NELEMB: total number of elements 
+        !C
+        !C  NNODE : total number of nodes 
+        !C  NNF   : total number of nodes on the free surface 
+        !C  NNB   : total number of nodes on the body surface
+        !C ------------------------------------------------------------
+        !C    
+        !C ** check nodes' situation 
           
 
-     WRITE(6,*) '  Inside CONVSB'
-     write(11,*) '  Inside CONVSB'
-     write(11,*) '  NELEMF=',NELEMF, '  NELEMB=',NELEMB
+        !WRITE(6,*) '  Inside CONVSB'
+        !write(11,*) '  Inside CONVSB'
+        !write(11,*) '  NELEMF=',NELEMF, '  NELEMB=',NELEMB
      
      
-     DO  IEL=1, NELEMF+NELEMB
-     write(11,1000) IEL,NCN(IEL)
-     write(11,1100) (XYZE(1,K,IEL),K=1,NCN(IEL))
-     write(11,1100) (XYZE(2,K,IEL),K=1,NCN(IEL))
-     write(11,1100) (XYZE(3,K,IEL),K=1,NCN(IEL))     
-     ENDDO
+        !DO  IEL=1, NELEMF+NELEMB
+         !   write(11,1000) IEL,NCN(IEL)
+         !   write(11,1100) (XYZE(1,K,IEL),K=1,NCN(IEL))
+         !   write(11,1100) (XYZE(2,K,IEL),K=1,NCN(IEL))
+         !   write(11,1100) (XYZE(3,K,IEL),K=1,NCN(IEL))     
+        !ENDDO
      
 1100    FORMAT(8E15.6)
      
      
       M=0
+
       IF (NELEMF .EQ. 0) THEN
         NNF=0
-      
-      
       ELSE
-         DO 200 IEL=1,  NELEMF
-           DO 180 I=1, NCN(IEL)
 
-         X=XYZE(1,I,IEL)
-         Y=XYZE(2,I,IEL)
-         Z=XYZE(3,I,IEL)
+        DO 200 IEL=1,  NELEMF
+            DO 180 I=1, NCN(IEL)
 
-             DO 150 L=1, M
-        tmp1 = DABS( X-XYZTP(1,L) )
-        tmp2 = DABS( Y-XYZTP(2,L) )
-        tmp3 = DABS( Z-XYZTP(3,L) )
-        tol = 1.0E-04
+                X=XYZE(1,I,IEL)
+                Y=XYZE(2,I,IEL)
+                Z=XYZE(3,I,IEL)
+                !========check coincident node
+                DO 150 L=1, M
+                    tmp1 = DABS( X-XYZTP(1,L) )
+                    tmp2 = DABS( Y-XYZTP(2,L) )
+                    tmp3 = DABS( Z-XYZTP(3,L) )
+                    tol = 1.0E-04
                IF((tmp1.LT.tol).AND.(tmp2.LT.tol).AND.(tmp3.lt.tol)) THEN
                  NCON(IEL, I)=L
                  GOTO 180
-               END IF
- 150         CONTINUE
+                    END IF
+ 150           CONTINUE
 
 !C ** if the point (XPM, YPM) does not concide with any other
 !C    points had been checked,  give a new code
 !C
              M=M+1
              NCON(IEL, I)=M
+             ! a new node matrix,xyztp 
              XYZTP(1,M)=X
              XYZTP(2,M)=Y
              XYZTP(3,M)=Z
@@ -292,7 +312,6 @@ contains
 200     CONTINUE
 
        NNF=M     
-     write(11,  *) ' NNF=',NNF
        END IF    
 !
 ! -----------------------------------------
@@ -331,8 +350,8 @@ contains
 
        NNODE=M
      NNB=NNODE-NNF
-     write(11,*)  ' NNB=',NNB,' NNF=',NNF,' NNODE=',NNODE
-     write(11,*) 
+    ! write(11,*)  ' NNB=',NNB,' NNF=',NNF,' NNODE=',NNODE
+     !write(11,*) 
 !
 ! ===========================================================
 !
