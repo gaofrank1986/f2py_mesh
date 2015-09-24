@@ -477,7 +477,7 @@ contains
 480      CONTINUE
 500     CONTINUE
 
-1000   FORMAT(1X,8I6)
   
        END
-   end module
+
+end module
